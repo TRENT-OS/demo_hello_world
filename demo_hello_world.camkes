@@ -1,0 +1,17 @@
+/* Copyright (C) 2020, HENSOLDT Cyber GmbH */
+
+/**
+ * @file
+ * @brief Assembly file of the CAmkES application.
+ */
+
+/** @cond SKIP_IMPORTS */
+import "components/hello_world_app/hello_world_app.camkes";
+/** @endcond */
+
+assembly {
+    composition {
+        component hello_world_app  main;
+    }
+}
+
