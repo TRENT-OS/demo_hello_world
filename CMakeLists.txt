@@ -23,6 +23,5 @@ DeclareCAmkESComponent(
         # no libs needed
 )
 
-DeclareCAmkESRootserver(demo_hello_world.camkes)
-GenerateCAmkESRootServer()
+DeclareAndCreateCamkESSystem(demo_hello_world.camkes)
 GenerateSimulateScript()
