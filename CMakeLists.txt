@@ -1,5 +1,5 @@
 #
-# Hello Word Demo
+# Demo Hello Word
 #
 # Copyright (C) 2019-2020, Hensoldt Cyber GmbH
 #
