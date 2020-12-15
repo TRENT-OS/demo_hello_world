@@ -6,6 +6,12 @@
 
 cmake_minimum_required(VERSION 3.7.2)
 
+if (NOT OS_SDK_PATH)
+    message(FATAL_ERROR "OS_SDK_PATH not set")
+endif()
+include("${OS_SDK_PATH}/CMakeLists.txt")
+os_sdk_setup_build()
+
 
 #-------------------------------------------------------------------------------
 project(tests_hello_world C)
