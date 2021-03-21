@@ -8,19 +8,24 @@ cmake_minimum_required(VERSION 3.7.2)
 
 
 #-------------------------------------------------------------------------------
-project(tests_hello_world C)
+project(tests_hello_world CXX)
 
 DeclareCAmkESComponent(
     hello_world_app
     INCLUDES
         # no include paths needed
     SOURCES
-        components/hello_world_app/src/main.c
+        components/hello_world_app/src/main.cpp
     C_FLAGS
         -Wall
         -Werror
+    CXX_FLAGS
+        -Wall
+        -Werror
+        -fno-exceptions
+        -fno-rtti
     LIBS
-        # no libs needed
+        os_core_api
 )
 
 DeclareAndCreateCamkESSystem(demo_hello_world.camkes)
