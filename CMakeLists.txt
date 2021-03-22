@@ -24,6 +24,7 @@ DeclareCAmkESComponent(
         -Werror
         -fno-exceptions
         -fno-rtti
+        -fno-threadsafe-statics
     LIBS
         os_core_api
         etl

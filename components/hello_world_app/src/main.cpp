@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "queue.h"
+
 using namespace std;
 
 void*
@@ -56,9 +58,9 @@ class Derived : public Runner
 extern "C" int
 run()
 {
-    temp<int> a(256);
+    temp<int>  a(256);
     temp<char> b(256);
-    Runner    r, *s;
+    Runner     r, *s;
 
     s = new Runner();
     s->run();
@@ -82,7 +84,24 @@ run()
     int n = 0;
     [&, n](int a) mutable { m = ++n + a; }(4);
 
-    printf("%d %d \n",m,n);
+    printf("%d %d \n", m, n);
+
+    etl::queue<int, 5> q;
+    for (int i = 0; i < 10; i++)
+    {
+        if (!q.full())
+            q.push(i);
+    }
+
+    printf("Queue size %d\n", q.size());
+    for (int i = 0; i < 10; i++)
+    {
+      if(!q.empty())
+      {
+        printf("Got element %d\n",q.front());
+        q.pop();
+      }
+    }
 
     return 0;
 }
