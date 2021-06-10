@@ -6,14 +6,62 @@
  * @file
  * @brief Assembly file of the CAmkES application.
  */
-
+import <std_connector.camkes>;
 /** @cond SKIP_IMPORTS */
 import "components/hello_world_app/hello_world_app.camkes";
 /** @endcond */
 
+connector trentos_thread {
+    from Procedures with 0 threads;
+    to Procedure;
+    attribute int id = 3;
+}
+
 assembly {
     composition {
         component hello_world_app  main;
+
+        connection  trentos_thread \
+            test1 ( \
+                from   main.thread1_1, \
+                to     main.thread1 \
+            );
+
+        connection  trentos_thread \
+            test2 ( \
+                from   main.thread2_1, \
+                to     main.thread2 \
+            );
+
+        connection  trentos_thread \
+            test3 ( \
+                from   main.thread3_1, \
+                to     main.thread3 \
+            );
+
+        connection  trentos_thread \
+            test4 ( \
+                from   main.thread4_1, \
+                to     main.thread4 \
+            );
+
+        connection seL4Notification thread_join_conn( \
+            from main.thread_join_e, \
+            to   main.thread_join_c);
+
+        connection seL4Notification thread_start_conn( \
+            from main.thread_start_e, \
+            to   main.thread_start_c);
+
+        connection seL4Notification thread_started_conn( \
+            from main.thread_started_e, \
+            to   main.thread_started_c);
     }
+
+    configuration {
+        main.threads_available_value = 0;
+        main.threads_join_value = 0;
+    }
+
 }
 

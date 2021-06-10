@@ -11,7 +11,38 @@
  * @brief Main component that writes "hello world!" to the stdout.
  * @hideinitializer
  */
+
+
+procedure if_thread {
+
+};
+
+
 component hello_world_app {
     control;
-}
 
+    consumes  EventX    thread_start_c;
+    emits     EventX    thread_start_e;
+
+    consumes  EventX    thread_started_c;
+    emits     EventX    thread_started_e;
+
+    consumes  EventX    thread_join_c;
+    emits     EventX    thread_join_e;
+
+    has       mutex     thread_start;
+    has       mutex     thread_join;
+
+    has       semaphore threads_available;
+    has       semaphore threads_join;
+
+    provides if_thread thread1;
+    provides if_thread thread2;
+    provides if_thread thread3;
+    provides if_thread thread4;
+
+    uses     if_thread thread1_1;
+    uses     if_thread thread2_1;
+    uses     if_thread thread3_1;
+    uses     if_thread thread4_1;
+}

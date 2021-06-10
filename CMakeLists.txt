@@ -20,7 +20,18 @@ DeclareCAmkESComponent(
         -Wall
         -Werror
     LIBS
+        os_core_api
         # no libs needed
+)
+
+DeclareCAmkESConnector(
+    trentos_thread
+    FROM
+    empty.c
+    TO
+    trentos_thread-to-template.c
+    TO_HEADER
+    trentos_thread-to-template.h
 )
 
 DeclareAndCreateCamkESSystem(demo_hello_world.camkes)
