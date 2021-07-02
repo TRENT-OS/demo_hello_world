@@ -3,7 +3,7 @@
         "Analysis-GlobalOptions": {
             "global_excludes": [
                 "/home/user/build_analysis/*",
-                "seos_sandbox/sdk-sel4-camkes/*",
+                "*/sdk-sel4-camkes/*",
                 "*/3rdParty/*"
             ]
         }
@@ -23,7 +23,14 @@
         },
         "Git": {
             "_active": true,
+            "rootpath": "$(AXIVION_ROOTPATH)",
             "sourceserver_gitdir": "$(AXIVION_SOURCESERVER_GITDIR)"
+        },
+        "Git2": {
+            "_active": true,
+            "_copy_from": "Git",
+            "rootpath": "$(AXIVION_ROOTPATH2)",
+            "sourceserver_gitdir": "$(AXIVION_SOURCESERVER_GITDIR2)"
         },
         "Project-GlobalOptions": {
             "ci_mode": {

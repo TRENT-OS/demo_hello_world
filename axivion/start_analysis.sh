@@ -35,13 +35,16 @@ DEVNET_CONNECTION=${DEVNET_CONNECTION:-OFF}
 
 # set default configuration values
 export BAUHAUS_CONFIG=${AXIVION_DIR}
-export AXIVION_PROJECT_DIR=${REPO_DIR}
+export AXIVION_PROJECT_DIR=/host
 export AXIVION_DASHBOARD_URL=http://hc-axiviondashboard:9090/axivion
 
 LOCAL_FILESTORAGE_DIR=/home/user/filestorage
 export AXIVION_DATABASES_DIR=${LOCAL_FILESTORAGE_DIR}
 SERVER_FILESTORAGE_DIR=/var/filestorage
-export AXIVION_SOURCESERVER_GITDIR=${SERVER_FILESTORAGE_DIR}/git/${PROJECTNAME}.git
+export AXIVION_ROOTPATH=$(basename $(realpath ${DEMO_DIR}))
+export AXIVION_SOURCESERVER_GITDIR=${SERVER_FILESTORAGE_DIR}/git/${PROJECTNAME}/${AXIVION_ROOTPATH}/.git
+export AXIVION_ROOTPATH2=$(basename $(realpath ${SANDBOX_DIR}))
+export AXIVION_SOURCESERVER_GITDIR2=${SERVER_FILESTORAGE_DIR}/git/${PROJECTNAME}/${AXIVION_ROOTPATH2}/.git
 
 # ensure local filestorage exists
 mkdir -p ${LOCAL_FILESTORAGE_DIR}
@@ -70,7 +73,9 @@ else
 
     # use local dashboard and repo
     export AXIVION_DASHBOARD_URL=http://localhost:9090/axivion
-    export AXIVION_SOURCESERVER_GITDIR=${AXIVION_PROJECT_DIR}/.git
+
+    export AXIVION_SOURCESERVER_GITDIR=${DEMO_DIR}/.git
+    export AXIVION_SOURCESERVER_GITDIR2=${SANDBOX_DIR}/.git
 
     for COMP_NAME in "${!COMPONENTS[@]}"; do
 

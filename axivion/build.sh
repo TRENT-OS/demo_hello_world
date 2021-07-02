@@ -20,5 +20,5 @@ source ${SCRIPT_DIR}/set_common_paths
 # Build the analysis component
 #-------------------------------------------------------------------------------
 
-cd ${REPO_DIR}
-seos_sandbox/build-system.sh ${SOURCE_DIR} zynq7000 ${BUILD_DIR} -D CMAKE_BUILD_TYPE=Debug
+cd ${SANDBOX_DIR}
+./build-system.sh ${SOURCE_DIR} zynq7000 ${BUILD_DIR} -D CMAKE_BUILD_TYPE=Debug
