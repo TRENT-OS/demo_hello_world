@@ -24,10 +24,12 @@ DeclareCAmkESComponent(
         # no libs needed
 )
 
+CAmkESAddTemplatesPath(connector)
+
 DeclareCAmkESConnector(
     trentos_thread
     FROM
-    empty.c
+    trentos_thread-to-template.c
     TO
     trentos_thread-to-template.c
     TO_HEADER
