@@ -13,9 +13,23 @@ project(tests_hello_world C)
 DeclareCAmkESComponent(
     hello_world_app
     INCLUDES
-        # no include paths needed
+        components/hello_world_app/
     SOURCES
         components/hello_world_app/src/main.c
+    C_FLAGS
+        -Wall
+        -Werror
+    LIBS
+        os_core_api
+        # no libs needed
+)
+
+DeclareCAmkESComponent(
+    hello_world_sender
+    INCLUDES
+        components/hello_world_sender/
+    SOURCES
+        components/hello_world_sender/src/main.c
     C_FLAGS
         -Wall
         -Werror

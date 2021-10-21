@@ -45,4 +45,7 @@ component hello_world_app {
     uses     if_thread thread2_1;
     uses     if_thread thread3_1;
     uses     if_thread thread4_1;
+
+    include "message.h";
+    dataport Msg event_in;
 }

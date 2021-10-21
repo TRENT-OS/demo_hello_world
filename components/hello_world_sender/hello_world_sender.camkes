@@ -1,0 +1,20 @@
+/*
+ * Copyright (C) 2020, HENSOLDT Cyber GmbH
+ */
+
+/**
+ * @file
+ * @brief The main `Hello World` component
+ */
+
+/**
+ * @brief Main component that writes "hello world!" to the stdout.
+ * @hideinitializer
+ */
+
+component hello_world_sender {
+    control;
+
+    include "message.h";
+    dataport Msg event_out;
+}

@@ -8,6 +8,17 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include <camkes/msgqueue.h>
+#include <camkes/msgqueue_template.h>
+
+#include "message.h"
+
+typedef struct msg
+{
+    int handle;
+    int status;
+} msg_t;
+
 volatile int counter = 0;
 
 int
@@ -217,6 +228,23 @@ run(void)
 
     seL4_DebugDumpScheduler();
 
+    camkes_msgqueue_receiver_t recv = {0};
+
+    printf("recv init %d\n", camkes_msgqueue_receiver_init(1, &recv));
+
+    camkes_msgqueue_wait(&recv);
+
+    Msg a, b;
+
+    printf("Status get %d\n", camkes_msgqueue_get(&recv, &a, sizeof(a)));
+
+    printf("Status %d %d\n", a.handle, a.status);
+
+    printf("Status get %d\n", camkes_msgqueue_get(&recv, &b, sizeof(b)));
+
+    printf("Status %d %d\n", b.handle, b.status);
+
     printf("hello world!\n");
+
     return 0;
 }

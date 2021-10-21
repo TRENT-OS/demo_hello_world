@@ -7,8 +7,10 @@
  * @brief Assembly file of the CAmkES application.
  */
 import <std_connector.camkes>;
+import <global-connectors.camkes>;
 /** @cond SKIP_IMPORTS */
 import "components/hello_world_app/hello_world_app.camkes";
+import "components/hello_world_sender/hello_world_sender.camkes";
 /** @endcond */
 
 connector trentos_thread {
@@ -19,6 +21,9 @@ connector trentos_thread {
 
 assembly {
     composition {
+
+        component hello_world_sender  sender;
+
         component hello_world_app  main;
 
         connection  trentos_thread \
@@ -56,11 +61,26 @@ assembly {
         connection seL4Notification thread_started_conn( \
             from main.thread_started_e, \
             to   main.thread_started_c);
+
+        connection seL4MessageQueue msgqueue(\
+            from sender.event_out, \
+            to   main.event_in);
     }
 
     configuration {
         main.threads_available_value = 0;
         main.threads_join_value = 0;
+
+        sender.event_out_id = 1;
+        main.event_in_id = 1;
+
+//  static_assert(sizeof(Msg) * 128 + sizeof(vq_vring_avail_t)
+// + sizeof(uint16_t) * 256 + sizeof(vq_vring_used_t)
+// + sizeof(struct vq_vring_used_elem) * 256
+// + sizeof(vq_vring_desc_t) * 256 <= sizeof(from_0_event_out_data),
+
+        msgqueue.size = 4096*2;
+        msgqueue.length = 64;
     }
 
 }
