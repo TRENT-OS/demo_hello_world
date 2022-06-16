@@ -1,11 +1,14 @@
 #
 # Demo Hello Word
 #
-# Copyright (C) 2019-2020, HENSOLDT Cyber GmbH
+# Copyright (C) 2019-2022, HENSOLDT Cyber GmbH
 #
 
 cmake_minimum_required(VERSION 3.7.2)
 
+find_package("os-sdk" REQUIRED)
+os_sdk_set_defaults()
+os_sdk_setup()
 
 #-------------------------------------------------------------------------------
 project(tests_hello_world C)
@@ -23,5 +26,4 @@ DeclareCAmkESComponent(
         # no libs needed
 )
 
-DeclareAndCreateCamkESSystem(demo_hello_world.camkes)
-GenerateSimulateScript()
+os_sdk_create_CAmkES_system(demo_hello_world.camkes)
