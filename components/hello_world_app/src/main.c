@@ -82,13 +82,13 @@ int run(void)
     test_benchmark_trace();
 
 #ifdef CONFIG_DEBUG_BUILD
+    printf("seL4_DebugSnapshot\n");
+    seL4_DebugSnapshot();
     printf("seL4_DebugDumpScheduler\n");
     seL4_DebugDumpScheduler();
-    //printf("seL4_DebugSnapshot\n");
-    //seL4_DebugSnapshot();
 #endif /* CONFIG_DEBUG_BUILD */
 
-    printf("hello world!\n");
+    // printf("hello world!\n");
 
     // test_null_pointer_dereference();
 
